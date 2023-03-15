@@ -32,7 +32,7 @@
     } else {
       // Was the user sent here after a logout?
       const params = new URLSearchParams(window.location.search);
-      const logoutRedirectUrl = urlParams.get('state');
+      const logoutRedirectUrl = params.get('state');
       window.location.href = logoutRedirectUrl;
     }
   </script>
