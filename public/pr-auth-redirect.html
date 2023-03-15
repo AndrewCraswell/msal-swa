@@ -18,13 +18,13 @@
       }
     });
 
-    const hash = window.location.hash;
+    const hash = decodeURI(window.location.hash);
     if (hash.startsWith("#code=")) {
       const regex = new RegExp(/\|(?<redirect>\S+)&/);
       const result = regex.exec(hash);
 
       if (result) {
-        const originUrl = result?.groups?.redirect;
+        const originUrl = decodeURI(result?.groups?.redirect);
         window.location.href = originUrl + hash;
       }
     }
