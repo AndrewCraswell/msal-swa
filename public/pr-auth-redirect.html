@@ -25,6 +25,7 @@
 
       if (result) {
         const originUrl = decodeURI(result?.groups?.redirect);
+        console.log(originUrl + hash);
         window.location.href = originUrl + hash;
       }
     }
