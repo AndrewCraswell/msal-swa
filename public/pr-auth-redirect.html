@@ -18,19 +18,14 @@
       }
     });
 
-    console.log("WINDOW HASH", window.location.hash);
-
-    const hash = decodeURI(window.location.hash);
-    console.log("DECODED HASH", hash);
-
     if (hash.startsWith("#code=")) {
       const regex = new RegExp(/\|(?<redirect>\S+)&/);
       const result = regex.exec(hash);
 
       if (result) {
         console.log("REDIRECT", result?.groups?.redirect)
-        const originUrl = decodeURI(result?.groups?.redirect);
-        console.log("DECODED REDIRECT", decodeURI(result?.groups?.redirect))
+        const originUrl = decodeURIComponent(result?.groups?.redirect);
+        console.log("DECODED REDIRECT", decodeURI(originUrl))
 
         console.log("FINAL", originUrl + hash);
 
