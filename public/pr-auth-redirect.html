@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preview Auth Redirect</title>
+</head>
+
+<body>
+
+  <script src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.34.0/lib/msal-browser.min.js"></script>
+  <script type="text/javascript">
+    const msalClient = new msal.PublicClientApplication({
+      auth: {
+        clientId: "16561780-a732-4b5a-8d0a-9eaf822a692c",
+      }
+    });
+
+    msalClient.handleRedirectPromise().then((resp) => {
+      if (resp !== null) {
+        window.location.href = resp.state;
+      }
+    })
+  </script>
+</body>
+
+</html>
