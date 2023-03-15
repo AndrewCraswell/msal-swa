@@ -13,15 +13,27 @@
   <script type="text/javascript">
     const msalClient = new msal.PublicClientApplication({
       auth: {
+        // TODO: Reference the environment variable
         clientId: "16561780-a732-4b5a-8d0a-9eaf822a692c",
       }
     });
 
-    msalClient.handleRedirectPromise().then((resp) => {
-      if (resp !== null) {
-        window.location.href = resp.state;
+    const hash = decodeURI(window.location.hash);
+    if (hash.startsWith("#code=")) {
+      const regex = new RegExp(/\|(?<redirect>\S+)&/);
+      const result = regex.exec(hash);
+
+      if (result) {
+        const originUrl = decodeURI(result?.groups?.redirect);
+        window.location.href = originUrl + hash;
       }
-    })
+    }
+
+    // msalClient.handleRedirectPromise().then((resp) => {
+    //   if (resp !== null) {
+    //     window.location.href = resp.state;
+    //   }
+    // })
   </script>
 </body>
 
