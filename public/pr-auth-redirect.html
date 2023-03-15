@@ -18,6 +18,7 @@
       }
     });
 
+
     // Was the user redirected here after login?
     const hash = decodeURI(window.location.hash);
     if (hash.startsWith("#code=")) {
@@ -31,7 +32,7 @@
     } else {
       // Was the user sent here after a logout?
       const params = new URLSearchParams(window.location.search);
-      const logoutRedirectUrl = urlParams.get('state');
+      const logoutRedirectUrl = params.get('state');
       window.location.href = logoutRedirectUrl;
     }
   </script>
