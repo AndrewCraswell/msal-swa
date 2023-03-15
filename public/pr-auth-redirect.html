@@ -18,6 +18,7 @@
       }
     });
 
+    const hash = decodeURI(window.location.hash);
     if (hash.startsWith("#code=")) {
       const regex = new RegExp(/\|(?<redirect>\S+)&/);
       const result = regex.exec(hash);
