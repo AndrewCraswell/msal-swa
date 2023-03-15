@@ -24,7 +24,6 @@
       const result = regex.exec(hash);
 
       if (result) {
-        console.log("REDIRECT", result?.groups?.redirect)
         const originUrl = decodeURIComponent(result?.groups?.redirect);
         console.log("DECODED REDIRECT", decodeURI(originUrl))
 
