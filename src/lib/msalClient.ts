@@ -1,8 +1,8 @@
 import {
   RedirectRequest,
   SilentRequest,
-  Configuration,
   PublicClientApplication,
+  EndSessionRequest,
 } from "@azure/msal-browser";
 
 export const msalLoginRequest: RedirectRequest = {
@@ -15,16 +15,30 @@ export const msalSilentRequest: SilentRequest = {
   scopes: ["user", "profile"],
 };
 
-const msalConfig: Configuration = {
+export const msalLogoutRequest: EndSessionRequest = {
+  state: window.location.origin,
+  postLogoutRedirectUri: getRedirectUri(),
+};
+
+export const msalClient = new PublicClientApplication({
   auth: {
-    clientId: "16561780-a732-4b5a-8d0a-9eaf822a692c",
-    authority:
-      "https://login.microsoftonline.com/6e5a9394-b5e1-4fbb-814e-a6c0be5bec86",
-    redirectUri: window.location.origin, // If in a stage environment, redirect to auth portal
+    clientId: import.meta.env.VITE_MSAL_CLIENT_ID,
+    redirectUri: getRedirectUri(),
   },
   cache: {
     cacheLocation: "localStorage",
   },
-};
+});
 
-export const msalClient = new PublicClientApplication(msalConfig);
+function getRedirectUri() {
+  const previewEnvironmentUrl = import.meta.env.VITE_PREVIEW_ENVIRONMENT_URL;
+  const envPattern = previewEnvironmentUrl.replace("*", "(?<branch>\\d+)");
+  const regexPattern = new RegExp(envPattern);
+
+  const result = regexPattern.exec(window.location.origin);
+  if (result) {
+    return import.meta.env.VITE_PREVIEW_REDIRECT_URL;
+  }
+
+  return window.location.origin;
+}

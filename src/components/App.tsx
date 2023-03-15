@@ -42,7 +42,7 @@ export function App() {
       )}
 
       <AuthenticatedTemplate>
-        <AccountCard name={account?.name} email={account?.username} />
+        <AccountCard account={account} />
       </AuthenticatedTemplate>
 
       <UnauthenticatedTemplate>
