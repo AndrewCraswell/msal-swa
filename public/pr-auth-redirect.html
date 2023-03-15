@@ -26,9 +26,7 @@
         console.log("REDIRECT", result?.groups?.redirect)
         const originUrl = decodeURIComponent(result?.groups?.redirect);
         console.log("DECODED REDIRECT", decodeURI(originUrl))
-
         console.log("FINAL", originUrl + hash);
-
         window.location.href = originUrl + hash;
       }
     }
