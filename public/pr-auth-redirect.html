@@ -18,6 +18,7 @@
       }
     });
 
+    // Was the user redirected here after login?
     const hash = decodeURI(window.location.hash);
     if (hash.startsWith("#code=")) {
       const regex = new RegExp(/\|(?<redirect>\S+)&/);
@@ -25,12 +26,13 @@
 
       if (result) {
         const originUrl = decodeURIComponent(result?.groups?.redirect);
-        console.log("DECODED REDIRECT", decodeURI(originUrl))
-
-        console.log("FINAL", originUrl + hash);
-
         window.location.href = originUrl + hash;
       }
+    } else {
+      // Was the user sent here after a logout?
+      const params = new URLSearchParams(window.location.search);
+      const logoutRedirectUrl = urlParams.get('state');
+      window.location.href = logoutRedirectUrl;
     }
   </script>
 </body>
