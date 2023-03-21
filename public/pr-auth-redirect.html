@@ -8,16 +8,9 @@
 </head>
 
 <body>
+  <span>Redirecting to the PR preview environment...</span>
 
-  <script src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.34.0/lib/msal-browser.min.js"></script>
   <script type="text/javascript">
-    const msalClient = new msal.PublicClientApplication({
-      auth: {
-        // TODO: Reference the environment variable
-        clientId: "16561780-a732-4b5a-8d0a-9eaf822a692c",
-      }
-    });
-
     // Was the user redirected here after login?
     const hash = decodeURI(window.location.hash);
     if (hash.startsWith("#code=")) {
